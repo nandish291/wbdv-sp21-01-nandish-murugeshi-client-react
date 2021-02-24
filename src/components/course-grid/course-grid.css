@@ -3,19 +3,19 @@
     margin : 15px
 }
 
-.fa-trash{
+.trash-grid{
     position: absolute;
     top: 92%;
     left: 92%
 }
 
-.fa-edit{
+.edit-grid{
     position: absolute;
     top: 92%;
     left: 80%
 }
 
-.fa-check{
+.check-grid{
     position: absolute;
     top: 92%;
     left: 80%

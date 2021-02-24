@@ -45,17 +45,17 @@ const CourseCard = ({
                 Edit details
               </Link>
             </div>
-            <i onClick={() => deleteCourse(course)} className="fas  fa-trash"></i>
+            <i onClick={() => deleteCourse(course)} className="fas  fa-trash trash-grid " />
             {/*<i onClick={() => setEditing((prevEditing) => !prevEditing)} className="fas fa-edit"></i>*/}
 
             {
                 editing &&
-                <i onClick={() => saveCourse()} className="fas fa-check pull-right"></i>
+                <i onClick={() => saveCourse()} className="fas fa-check check-grid pull-right"/>
             }
 
             {
                 !editing &&
-                <i onClick={() => setEditing(true)} className="fas fa-edit"></i>
+                <i onClick={() => setEditing(true)} className="fas fa-edit edit-grid"/>
             }
 
           </div>
