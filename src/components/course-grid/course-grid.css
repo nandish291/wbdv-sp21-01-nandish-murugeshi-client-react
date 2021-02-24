@@ -1,0 +1,22 @@
+.card{
+    width: 18rem;
+    margin : 15px
+}
+
+.fa-trash{
+    position: absolute;
+    top: 92%;
+    left: 92%
+}
+
+.fa-edit{
+    position: absolute;
+    top: 92%;
+    left: 80%
+}
+
+.fa-check{
+    position: absolute;
+    top: 92%;
+    left: 80%
+}
