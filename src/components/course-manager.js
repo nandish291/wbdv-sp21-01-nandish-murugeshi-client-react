@@ -37,7 +37,6 @@ export default class CourseManager extends React.Component {
   };
 
   deleteCourse = (course) => {
-    // alert("delete course " + course._id)
     courseService.deleteCourse(course._id).then((status) => {
       // this.setState({
       //   courses: this.state.courses.filter(c => c._id !== course._id)
@@ -49,7 +48,6 @@ export default class CourseManager extends React.Component {
   };
 
   addCourse = () => {
-    // alert('add course')
     const newCourse = {
       title: this.state.title,
       owner: "me",
@@ -65,6 +63,7 @@ export default class CourseManager extends React.Component {
   render() {
     return (
       <div>
+        <Route path="/courses/table" exact={true}>
         <nav className="navbar navbar-light bg-light">
           <div className="container col">
             <h4>Course Manager</h4>
@@ -76,20 +75,29 @@ export default class CourseManager extends React.Component {
         </Link>
         </nav>
           {/*<Route path="/courses/table" component={CourseTable}/>*/}
-        <Route path="/courses/table" exact={true}>
+
           <CourseTable
             updateCourse={this.updateCourse}
             deleteCourse={this.deleteCourse}
             courses={this.state.courses}
           />
+          <i className="fas fa-2x fa-plus" style={{position: "fixed", top: "95%",left:"95%"}} onClick={this.addCourse}></i>
         </Route>
         {/*<Route path="/courses/grid" component={CourseGrid}/>*/}
         <Route path="/courses/grid" exact={true}>
+          <nav className="navbar navbar-light bg-light">
+            <div className="container col">
+              <h4>Course Manager</h4>
+            </div>
+            <input className="form-control col" onChange={(e)=>this.setState({title: e.target.value})} value={this.state.title}></input>
+            <i className="fas fa-plus col" onClick={this.addCourse}></i>
+            <Link to="/">
+              <i className="fas fa-2x fa-home float-right"></i>
+            </Link>
+          </nav>
           <CourseGrid courses={this.state.courses} updateCourse={this.updateCourse} deleteCourse={this.deleteCourse} />
+          <i className="fas fa-2x fa-plus" style={{position: "fixed", top: "95%",left:"95%"}} onClick={this.addCourse}></i>
         </Route>
-        {/*<CourseTable courses={this.state.courses}/>*/}
-        {/*<CourseGrid courses={this.state.courses}/>*/}
-        <i className="fas fa-2x fa-plus" style={{position: "fixed", top: "95%",left:"95%"}} onClick={this.addCourse}></i>
       </div>
     );
   }

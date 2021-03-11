@@ -1,73 +1,42 @@
 import React from 'react'
-import {Link} from "react-router-dom";
+import {Link,useParams} from "react-router-dom";
+import {Provider} from 'react-redux';
+import {combineReducers, createStore} from "redux";
 
-const CourseEditor = ({history}) =>
-  <div><h1>
-      Course Editor
-      <i className="fas fa-times float-right"
-         onClick={() => history.goBack()}></i>
-  </h1>
-  <div className="row">
-  <div className="col-4">
+import moduleReducer from "../../reducers/module-reducer";
+import lessonReducer from "../../reducers/lesson-reducer";
+import ModuleList from "./module-list";
+import LessonTabs from "./lesson-tabs";
+import TopicTabs from "./topic-pills";
+import topicReducer from "../../reducers/topic-reducer";
 
-      <ul className="list-group">
-          <li className="list-group-item active">
-              Module 1
-              <i className="pull-right fas fa-trash"></i>
-          </li>
-          <li className="list-group-item">
-              Module 2
-              <i className="pull-right fas fa-trash"></i>
-          </li>
-          <li className="list-group-item">Module 3</li>
-          <li className="list-group-item">Module 4</li>
-          <li className="list-group-item">Module 5</li>
-          <li className="list-group-item">Module 6</li>
-          <li className="list-group-item">Module 7</li>
-      </ul>
+const reducer = combineReducers({
+    moduleReducer,
+    lessonReducer,
+    topicReducer
+})
 
-  </div>
-  <div className="col-8">
-      <ul className="nav nav-tabs">
-          <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
-                  Active
-                  <i className="pull-right fas fa-trash"></i>
-              </a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">
-                  <i className="fas fa-plus"></i>
-              </a>
-          </li>
-      </ul>
 
-      <br/>
+const store=createStore(reducer)
 
-      <ul className="nav nav-pills">
-          <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">Active</a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-          </li>
-          <li className="nav-item">
-              <a className="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-          </li>
-      </ul>
-      </div>
-  </div>
-  </div>
+const CourseEditor = ({history}) =>{
+    const {layout, courseId, moduleId, topicId} = useParams()
+    return (<Provider store={store}><h1>
+        Course Editor
+        <Link to={`/courses/${layout}`}>
+            <i className="fas fa-times float-right"></i>
+        </Link>
+    </h1>
+        <div className="row">
+            <div className="col-3">
+                <ModuleList />
+            </div>
+            <div className="col9">
+                <LessonTabs/>
+                <TopicTabs/>
+            </div>
+
+        </div>
+    </Provider>)
+}
 export default CourseEditor
