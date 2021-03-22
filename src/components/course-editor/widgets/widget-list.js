@@ -20,8 +20,11 @@ const WidgetList = (
     }, [topicId,lessondId,moduleId])
     return(
         <div>
-            <i onClick={()=>createWidget(topicId)} className="fas fa-plus float-right fa-2x"></i>
-            <h1>Widget List {widget.id}</h1>
+            <i onClick={()=>{
+                if (topicId === undefined)
+                    alert("select a topic before proceeding")
+                else
+                    createWidget(topicId)}} className="fas fa-plus float-right fa-2x"></i>
             <ul className="list-group">
                 {
                     widgets.map(_widget =>
