@@ -1,4 +1,4 @@
-const BASE_URL="https://wbdv-sp21-01-nandishmurugeshi.herokuapp.com/api"
+const BASE_URL="http://localhost:8080/api/"
 
 const createWidget = (widget) =>
     fetch(`${BASE_URL}/topics/${widget.topicId}/widgets`, {

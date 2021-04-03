@@ -4,6 +4,8 @@ import HeadingWidget from "./heading-widget";
 import ParagraphWidget from "./paragraph-widget";
 import {useParams} from "react-router-dom"
 import widgetActions from "../../../actions/widget-actions";
+import ListWidget from "./list-widget";
+import ImageWidget from "./image-widget";
 
 const WidgetList = (
     {
@@ -40,6 +42,8 @@ const WidgetList = (
                                     <select value={widget.type} onChange={e=> setWidget({...widget,type:e.target.value })} className="form-control" style={{marginTop:"2em",marginBottom:"1em"}}>
                                         <option value={"HEADING"}>Heading</option>
                                         <option value={"PARAGRAPH"}>Paragraph</option>
+                                        <option value={"IMAGE"}>IMAGE</option>
+                                        <option value={"LIST"}>LIST</option>
                                     </select>
                                 </>
                             }
@@ -62,6 +66,22 @@ const WidgetList = (
                             {
                                 _widget.type === "PARAGRAPH" &&
                                 <ParagraphWidget
+                                    setWidget={setWidget}
+                                    editing={_widget.id === widget.id}
+                                    _widget={_widget}
+                                    widget={widget}/>
+                            }
+                            {
+                                _widget.type === "LIST" &&
+                                <ListWidget
+                                    setWidget={setWidget}
+                                    editing={_widget.id === widget.id}
+                                    _widget={_widget}
+                                    widget={widget}/>
+                            }
+                            {
+                                _widget.type === "IMAGE" &&
+                                <ImageWidget
                                     setWidget={setWidget}
                                     editing={_widget.id === widget.id}
                                     _widget={_widget}
