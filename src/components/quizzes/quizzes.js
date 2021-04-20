@@ -6,10 +6,8 @@ const Quizzes=()=>{
     const {courseId}=useParams();
     const [quizzes,setQuizzes] = useState([])
     const findQuizzes= ()=>{
-        console.log("called");
         quizService.findAllQuizzes().then(response=> {
             setQuizzes(response);
-            console.log('quizzes ', quizzes)
         })
 
     }
@@ -25,6 +23,10 @@ const Quizzes=()=>{
                         <Link to={`/courses/${courseId}/quizzes/${quiz._id}`} >{quiz.title}</Link>
                         <Link to={`/courses/${courseId}/quizzes/${quiz._id}`}>
                             <button className='btn btn-primary float-right'>Start</button> </Link>
+                        <Link className="float-right"
+                              to={`/quizzes/${quiz._id}/attempts`}>
+                            All Attempts for {quiz.title}
+                        </Link>
                     </div>
                 )
                 }

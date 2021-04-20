@@ -1,6 +1,23 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 
-const MultipleChoice = ({question}) => {
+const setSubmitAnswer=(question,choice)=>{
+    question.answer=choice;
+}
+const MultipleChoice = ({question,submitClicked}) => {
+    const checkSubmit=()=>{
+        if(submitClicked===true){
+            if(answer === question.correct)
+            {
+                setCorrect(true)
+                setShowAnswers(false)
+            }else{
+
+                setCorrect(false)
+                setShowAnswers(true)
+            }
+        }
+    }
+    useEffect(()=>checkSubmit(),[submitClicked])
     const [answer, setAnswer] = useState('')
     const [correct, setCorrect] = useState(false)
     const [showAnswers, setShowAnswers] = useState(false)
@@ -36,7 +53,7 @@ const MultipleChoice = ({question}) => {
                             }
                                 `}
 
-                                key={question._id}>
+                                key={choice}>
 
                                 <label>
                                     <input type="radio"
@@ -44,6 +61,7 @@ const MultipleChoice = ({question}) => {
                                                setAnswer(choice);
                                                setShowAnswers(false);
                                                setCorrect(false);
+                                               setSubmitAnswer(question,choice)
                                            }}
                                            name={question._id}/>
                                     {choice}
@@ -70,23 +88,6 @@ const MultipleChoice = ({question}) => {
             Your Answer: {answer}
             <br/>
             <br/>
-            <button className="btn btn-success"
-                    onClick={
-                        ()=> {
-
-                            if(answer === question.correct)
-                            {
-                                setCorrect(true)
-                                setShowAnswers(false)
-                            }else{
-
-                                setCorrect(false)
-                                setShowAnswers(true)
-                            }
-
-                        }
-                    }>Grade</button>
-
         </div>
     )
 }

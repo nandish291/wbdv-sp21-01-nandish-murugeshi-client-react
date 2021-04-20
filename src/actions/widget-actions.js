@@ -26,7 +26,6 @@ export const findWidgetsForTopic = (dispatch, topicId) => {
             type: FIND_WIDGETS_FOR_TOPIC,
             widgets
         }))
-    // result.then((widgets)=> console.log(widgets));
 }
 
 const widgetActions={
